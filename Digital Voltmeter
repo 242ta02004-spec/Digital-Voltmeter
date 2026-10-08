@@ -1,0 +1,77 @@
+import java.util.Scanner;
+
+public class DigitalVoltmeter {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        double voltage;
+        double totalVoltage = 0;
+        double averageVoltage;
+
+        System.out.println("================================");
+        System.out.println("       DIGITAL VOLTMETER");
+        System.out.println("================================");
+
+        System.out.print("Enter number of readings: ");
+        int n = sc.nextInt();
+
+        if (n <= 0) {
+            System.out.println("Invalid number of readings.");
+            sc.close();
+            return;
+        }
+
+        // Read voltage values
+        for (int i = 1; i <= n; i++) {
+
+            System.out.print("Enter voltage reading "
+                    + i + " (V): ");
+
+            voltage = sc.nextDouble();
+
+            if (voltage < 0) {
+                System.out.println(
+                    "Voltage cannot be negative.");
+                i--;
+                continue;
+            }
+
+            totalVoltage += voltage;
+        }
+
+        // Calculate average
+        averageVoltage = totalVoltage / n;
+
+        // Display result
+        System.out.println("\n================================");
+        System.out.println("       VOLTMETER RESULT");
+        System.out.println("================================");
+
+        System.out.printf(
+            "Total Voltage  : %.2f V%n",
+            totalVoltage
+        );
+
+        System.out.printf(
+            "Average Voltage: %.2f V%n",
+            averageVoltage
+        );
+
+        // Voltage status
+        if (averageVoltage < 5) {
+            System.out.println("Status: LOW VOLTAGE");
+        }
+        else if (averageVoltage <= 240) {
+            System.out.println("Status: NORMAL VOLTAGE");
+        }
+        else {
+            System.out.println("Status: HIGH VOLTAGE");
+        }
+
+        System.out.println("================================");
+
+        sc.close();
+    }
+}
